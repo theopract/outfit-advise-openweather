@@ -145,15 +145,19 @@ function parseWeatherData(data) {
 }
 
 function handlePermission() {
-  navigator.permissions.query({ name: "geolocation" }).then(function (result) {
-    reportState(result.state);
-    tryGeoAccess(result.state);
-    result.onchange = function () {
+  if (navigator?.permissions?.query) {
+    navigator.permissions.query({ name: "geolocation" }).then(function (result) {
       reportState(result.state);
-      console.log("onchange!");
-      // tryGeoAccess(result.state);
-    };
-  });
+      tryGeoAccess(result.state);
+      result.onchange = function () {
+        reportState(result.state);
+        console.log("onchange!");
+        // tryGeoAccess(result.state);
+      };
+    });
+  } else {
+    tryGeoAccess("default");
+  }
 }
 
 function reportState(state) {
