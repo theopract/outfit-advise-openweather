@@ -84,34 +84,36 @@ function fetchWeather(coord) {
     .then(res => res.json())
     .then(data => {
       const weatherData = parseWeatherData(data);
-      const weatherIcons = weatherData.map(hour => hour.weather[0].icon);
-      const weatherIDs = weatherData.map(hour => hour.weather[0].id);
-      const weatherTemps = weatherData.map(hour => hour.temp);
-
-      const mainIconFor2hours = getMostLikelyWeatherIcon(weatherIcons.slice(0, 2));
-      const mainIconFor12hours = getMostLikelyWeatherIcon(weatherIcons);
-
-      const shouldTakeUmbrella2h = getUmbrellaStatus(weatherIDs.slice(0, 2));
-      const shouldTakeUmbrella12h = getUmbrellaStatus(weatherIDs);
-
-      const averageTemperature2h = getAverageTemerature(weatherTemps.slice(0, 2));
-      const averageTemperature12h = getAverageTemerature(weatherTemps);
-
-      weatherImagesElems[0].src = `${ICON_URL}${mainIconFor2hours}@2x.png`;
-      weatherImagesElems[1].src = `${ICON_URL}${mainIconFor12hours}@2x.png`;
-
-      weatherDescrElems[0].textContent = `Ожидаем около ${averageTemperature2h} °C, ${
-        shouldTakeUmbrella2h === true ? "вероятен дождь" : "осадки не ожидаем"
-      } `;
-      weatherDescrElems[1].textContent = `Ожидаем около ${averageTemperature2h} °C, ${
-        shouldTakeUmbrella12h === true ? "вероятен дождь" : "осадки не ожидаем"
-      } `;
-
-      weatherOutfitElems[0].innerHTML = `Рекомендуем ${getRecommendedOutfit(averageTemperature2h)}`;
-      weatherOutfitElems[1].innerHTML = `Рекомендуем ${getRecommendedOutfit(
-        averageTemperature12h
-      )}`;
+      UIupdate(weatherData);
     });
+}
+
+function UIupdate(data) {
+  const weatherIcons = data.map(hour => hour.weather[0].icon);
+  const weatherIDs = data.map(hour => hour.weather[0].id);
+  const weatherTemps = data.map(hour => hour.temp);
+
+  const mainIconFor2hours = getMostLikelyWeatherIcon(weatherIcons.slice(0, 2));
+  const mainIconFor12hours = getMostLikelyWeatherIcon(weatherIcons);
+
+  const shouldTakeUmbrella2h = getUmbrellaStatus(weatherIDs.slice(0, 2));
+  const shouldTakeUmbrella12h = getUmbrellaStatus(weatherIDs);
+
+  const averageTemperature2h = getAverageTemerature(weatherTemps.slice(0, 2));
+  const averageTemperature12h = getAverageTemerature(weatherTemps);
+
+  weatherImagesElems[0].src = `${ICON_URL}${mainIconFor2hours}@2x.png`;
+  weatherImagesElems[1].src = `${ICON_URL}${mainIconFor12hours}@2x.png`;
+
+  weatherDescrElems[0].textContent = `Ожидаем около ${averageTemperature2h} °C, ${
+    shouldTakeUmbrella2h === true ? "вероятен дождь" : "осадки не ожидаем"
+  } `;
+  weatherDescrElems[1].textContent = `Ожидаем около ${averageTemperature2h} °C, ${
+    shouldTakeUmbrella12h === true ? "вероятен дождь" : "осадки не ожидаем"
+  } `;
+
+  weatherOutfitElems[0].innerHTML = `Рекомендуем ${getRecommendedOutfit(averageTemperature2h)}`;
+  weatherOutfitElems[1].innerHTML = `Рекомендуем ${getRecommendedOutfit(averageTemperature12h)}`;
 }
 
 function getUmbrellaStatus(idsArr) {
