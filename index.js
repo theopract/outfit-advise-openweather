@@ -1,5 +1,5 @@
 const OPEN_WEATHER_LINK = "https://api.openweathermap.org/data/2.5/onecall";
-const ICON_URL = "http://openweathermap.org/img/wn/"; //http://openweathermap.org/img/wn/10d@2x.png
+const ICON_URL = "https://openweathermap.org/img/wn/"; //http://openweathermap.org/img/wn/10d@2x.png
 const defaultLAT = 55.589656;
 const defaultLON = 37.599262;
 let LAT;
