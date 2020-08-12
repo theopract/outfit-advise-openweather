@@ -108,7 +108,7 @@ function UIupdate(data) {
   weatherDescrElems[0].textContent = `Ожидаем около ${averageTemperature2h} °C, ${
     shouldTakeUmbrella2h === true ? "вероятен дождь" : "осадки не ожидаем"
   } `;
-  weatherDescrElems[1].textContent = `Ожидаем около ${averageTemperature2h} °C, ${
+  weatherDescrElems[1].textContent = `Ожидаем около ${averageTemperature12h} °C, ${
     shouldTakeUmbrella12h === true ? "вероятен дождь" : "осадки не ожидаем"
   } `;
 
