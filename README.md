@@ -27,4 +27,9 @@
 
 ## Пример интерфейса программы
 
+<details>
+<summary>Показать изображение</summary>
+
 ![UI example](./imgs/app-example.jpg)
+
+</details>
