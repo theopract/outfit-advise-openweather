@@ -33,3 +33,5 @@
 ![UI example](./imgs/app-example.jpg)
 
 </details>
+
+**Ссылка на видео демонстрацию:** https://1drv.ms/u/s!AsRlSIXimhk0gt41pL9SEKUvcwAQCg?e=5zWSYd
