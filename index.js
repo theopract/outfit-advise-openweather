@@ -1,3 +1,5 @@
+import { chartOptions } from './js/chart.js'
+
 const OPEN_WEATHER_LINK = "https://api.openweathermap.org/data/2.5/onecall";
 const ICON_URL = "https://openweathermap.org/img/wn/"; //http://openweathermap.org/img/wn/10d@2x.png
 const defaultLAT = 55.589656;
@@ -75,6 +77,10 @@ function sortIcons(a, b) {
   return 0;
 }
 
+function convertForHighCharts(data, timeZoneOffest) {
+  return data.map(obj => Object.keys(obj).filter(key => ['dt', 'temp'].includes(key)).map(key => key === 'dt' ? obj[key] * 1000 + timeZoneOffest: obj[key]));
+}
+
 function fetchWeather(coord) {
   const { LAT, LON } = coord;
   fetch(
@@ -83,7 +89,10 @@ function fetchWeather(coord) {
   )
     .then(res => res.json())
     .then(data => {
+      const timeZoneOffset = data.timezone_offset * 1000;
       const weatherData = parseWeatherData(data);
+      chartOptions.series[0].data = convertForHighCharts(weatherData, timeZoneOffset);
+      Highcharts.chart('container', chartOptions);
       UIupdate(weatherData);
     });
 }

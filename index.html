@@ -5,8 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Outfit Advise Openweather</title>
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/chart.css">
   </head>
   <body>
+    <script src="./libs/highcharts.js"></script>
+    <script src="./libs/series-label.js"></script>
+    <script src="./libs/exporting.js"></script>
+    <script src="./libs/export-data.js"></script>
+    <script src="./libs/accessibility.js"></script>
     <div class="wrapper">
       <header>
         <h1>Прогноз погоды</h1>
@@ -36,7 +42,11 @@
         </div>
         </div>
       </main>
+      <figure class="highcharts-figure">
+        <div id="container"></div>
+    </figure>
     </div> <!-- wrapper -->
-    <script src="./index.js"></script>
+    <script type="module" src="./index.js"></script>
+    <!-- <script type="module" src="./js/chart.js"></script> -->
   </body>
 </html>
