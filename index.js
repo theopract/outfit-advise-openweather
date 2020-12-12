@@ -78,7 +78,9 @@ function sortIcons(a, b) {
 }
 
 function convertForHighCharts(data, timeZoneOffest) {
-  return data.map(obj => Object.keys(obj).filter(key => ['dt', 'temp'].includes(key)).map(key => key === 'dt' ? obj[key] * 1000 + timeZoneOffest: obj[key]));
+  let result = data.map(obj => Object.keys(obj).filter(key => ['dt', 'temp'].includes(key)).map(key => key === 'dt' ? obj[key] * 1000 + timeZoneOffest: obj[key]))
+  // result = result.filter((e, i) => i % 2 === 0);
+  return result;
 }
 
 function fetchWeather(coord) {
